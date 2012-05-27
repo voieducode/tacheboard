@@ -1,4 +1,4 @@
-/*!
+﻿/*!
 * Note:  While Microsoft is not the author of this script file, Microsoft
 * grants you the right to use this file for the sole purpose of either: 
 * (i) interacting through your browser with the Microsoft website, subject 
@@ -563,7 +563,7 @@ window.Modernizr = (function( window, document, undefined ) {
     };
 
     tests['borderimage'] = function() {
-        return testPropsAll('borderImage');
+        return testPropsAll('borderStatusImage');
     };
 
 

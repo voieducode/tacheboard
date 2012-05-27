@@ -8826,8 +8826,8 @@ $.extend(Datepicker.prototype, {
 			input.focus(this._showDatepicker);
 		if (showOn == 'button' || showOn == 'both') { // pop-up date picker when button clicked
 			var buttonText = this._get(inst, 'buttonText');
-			var buttonImage = this._get(inst, 'buttonImage');
-			inst.trigger = $(this._get(inst, 'buttonImageOnly') ?
+			var buttonImage = this._get(inst, 'buttonStatusImage');
+			inst.trigger = $(this._get(inst, 'buttonStatusImageOnly') ?
 				$('<img/>').addClass(this._triggerClass).
 					attr({ src: buttonImage, alt: buttonText, title: buttonText }) :
 				$('<button type="button"></button>').addClass(this._triggerClass).
@@ -11954,7 +11954,7 @@ $.effects.fold = function(o) {
 $.effects.highlight = function(o) {
 	return this.queue(function() {
 		var elem = $(this),
-			props = ['backgroundImage', 'backgroundColor', 'opacity'],
+			props = ['backgroundStatusImage', 'backgroundColor', 'opacity'],
 			mode = $.effects.setMode(elem, o.options.mode || 'show'),
 			animation = {
 				backgroundColor: elem.css('backgroundColor')

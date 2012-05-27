@@ -1,7 +1,10 @@
-﻿using System.Web.Http;
+﻿using System.Reflection;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Raven.Client.Document;
+using Raven.Client.Indexes;
 
 namespace TacheBoard.Web
 {
@@ -10,6 +13,8 @@ namespace TacheBoard.Web
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        public static DocumentStore Store;
+
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
@@ -21,7 +26,7 @@ namespace TacheBoard.Web
 
             routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/v1/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
 
@@ -40,6 +45,16 @@ namespace TacheBoard.Web
             RegisterRoutes(RouteTable.Routes);
 
             BundleTable.Bundles.RegisterTemplateBundles();
+
+            InitRavenDb();
+        }
+
+        private static void InitRavenDb()
+        {
+            Store = new DocumentStore {ConnectionStringName = "RavenDB"};
+            Store.Initialize();
+
+            IndexCreation.CreateIndexes(Assembly.GetCallingAssembly(), Store);
         }
     }
 }
